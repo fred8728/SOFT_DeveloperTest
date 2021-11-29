@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeStorageImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BookingSystem</a> &gt; <a href="index.source.html" class="el_package">datalayer.Employee</a> &gt; <span class="el_source">EmployeeStorageImpl.java</span></div><h1>EmployeeStorageImpl.java</h1><pre class="source lang-java linenums">package datalayer.Employee;
+
+import dto.Booking;
+import dto.Customer;
+import dto.Employee;
+import dto.EmployeeCreation;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class EmployeeStorageImpl implements EmployeeStorage{
+
+    private String connectionString;
+    private String username, password;
+
+<span class="nc" id="L17">    public EmployeeStorageImpl(String conStr, String user, String pass){</span>
+<span class="nc" id="L18">        connectionString = conStr;</span>
+<span class="nc" id="L19">        username = user;</span>
+<span class="nc" id="L20">        password = pass;</span>
+<span class="nc" id="L21">    }</span>
+
+    private Connection getConnection() throws SQLException {
+<span class="nc" id="L24">        return DriverManager.getConnection(connectionString, username, password);</span>
+    }
+
+    @Override
+    public int createEmployee(EmployeeCreation employeeCreation) throws SQLException {
+<span class="nc" id="L29">        var sql = &quot;insert into Employees(firstname, lastname) values (?, ?)&quot;;</span>
+<span class="nc" id="L30">        try (var con = getConnection();</span>
+<span class="nc" id="L31">             var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="nc" id="L32">            stmt.setString(1, employeeCreation.getFirstName());</span>
+<span class="nc" id="L33">            stmt.setString(2, employeeCreation.getLastName());</span>
+<span class="nc" id="L34">            stmt.executeUpdate();</span>
+
+            // get the newly created id
+<span class="nc" id="L37">            try (var resultSet = stmt.getGeneratedKeys()) {</span>
+<span class="nc" id="L38">                resultSet.next();</span>
+<span class="nc" id="L39">                int newId = resultSet.getInt(1);</span>
+<span class="nc" id="L40">                return newId;</span>
+            }
+        }
+    }
+
+    @Override
+    public Collection&lt;Employee&gt; getEmployeeWithId(int employeeId) throws SQLException {
+<span class="nc" id="L47">        var sql = &quot;select * from Employees where ID = ?&quot;;</span>
+<span class="nc" id="L48">        try (var con = getConnection();</span>
+<span class="nc" id="L49">             var stmt = con.prepareStatement(sql)) {</span>
+<span class="nc" id="L50">            stmt.setInt(1, employeeId);</span>
+<span class="nc" id="L51">            var results = new ArrayList&lt;Employee&gt;();</span>
+
+<span class="nc" id="L53">            try (var resultSet = stmt.executeQuery()) {</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                while (resultSet.next()){</span>
+<span class="nc" id="L55">                    var id = resultSet.getInt(&quot;ID&quot;);</span>
+<span class="nc" id="L56">                    var firstName = resultSet.getString(&quot;firstname&quot;);</span>
+<span class="nc" id="L57">                    var lastName = resultSet.getString(&quot;lastname&quot;);</span>
+
+<span class="nc" id="L59">                    Employee e = new Employee(id, firstName, lastName);</span>
+<span class="nc" id="L60">                    results.add(e);</span>
+<span class="nc" id="L61">                }</span>
+<span class="nc" id="L62">                return results;</span>
+            }
+        }
+    }
+
+    @Override
+    public Collection&lt;Employee&gt; getEmployees() throws SQLException {
+<span class="nc" id="L69">        try (var con = getConnection();</span>
+<span class="nc" id="L70">             var stmt = con.createStatement()) {</span>
+<span class="nc" id="L71">            var results = new ArrayList&lt;Employee&gt;();</span>
+
+<span class="nc" id="L73">            try (ResultSet resultSet = stmt.executeQuery(&quot;select * from Employees&quot;)) {</span>
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                while (resultSet.next()) {</span>
+<span class="nc" id="L76">                    int id = resultSet.getInt(&quot;ID&quot;);</span>
+<span class="nc" id="L77">                    String firstname = resultSet.getString(&quot;firstname&quot;);</span>
+<span class="nc" id="L78">                    String lastname = resultSet.getString(&quot;lastname&quot;);</span>
+<span class="nc" id="L79">                    Employee e = new Employee(id, firstname, lastname);</span>
+<span class="nc" id="L80">                    results.add(e);</span>
+<span class="nc" id="L81">                }</span>
+            }
+<span class="nc" id="L83">            return results;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

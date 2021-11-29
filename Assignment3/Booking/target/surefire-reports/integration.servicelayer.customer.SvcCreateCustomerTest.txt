@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: integration.servicelayer.customer.SvcCreateCustomerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.151 s - in integration.servicelayer.customer.SvcCreateCustomerTest

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BookingSystem</a> &gt; <a href="index.source.html" class="el_package">main</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package main;
+
+import datalayer.Employee.EmployeeStorage;
+import datalayer.Employee.EmployeeStorageImpl;
+import datalayer.booking.BookingStorageImpl;
+import dto.*;
+import datalayer.customer.CustomerStorageImpl;
+import servicelayer.employee.EmployeeServiceImpl;
+
+import java.util.Date;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+
+<span class="nc" id="L16">public class Main {</span>
+
+    private static final String conStr = &quot;jdbc:mysql://localhost:3307/BookingTest&quot;;
+    private static final String user = &quot;root&quot;;
+    private static final String pass = &quot;testuser1234&quot;;
+    private EmployeeStorage str;
+
+    public static void main(String[] args) throws SQLException {
+<span class="nc" id="L24">        BookingStorageImpl booking = new BookingStorageImpl(conStr, user,pass);</span>
+<span class="nc" id="L25">        CustomerStorageImpl storage = new CustomerStorageImpl(conStr, user, pass);</span>
+<span class="nc" id="L26">        EmployeeStorageImpl employee = new EmployeeStorageImpl(conStr,user,pass);</span>
+//        CustomerCreation cust = new CustomerCreation(&quot;Frederik&quot;, &quot;Hansen&quot;);
+//        storage.createCustomer(cust);
+//        EmployeeCreation em = new EmployeeCreation(&quot;Frederikke&quot;, &quot;Nilsson&quot;);
+//        employee.createEmployee(em);
+//        BookingCreation b = new BookingCreation(1,1, convertToSQLDate(new Date()) , &quot;08:10&quot;,&quot;20:30&quot;);
+//        booking.createBooking(b);
+//
+//        for(Booking b1 : booking.getBookingsForCustomer(1)){
+//            System.out.println(b1);
+//        }
+//
+//        for(Employee e : employee.getEmployeeWithId(1)){
+//            System.out.println(e);
+//        }
+
+
+<span class="nc" id="L43">    }</span>
+//        CustomerStorageImpl storage = new CustomerStorageImpl(conStr, user, pass);
+//
+//        System.out.println(&quot;Got customers: &quot;);
+//        for(Customer c : storage.getCustomers()) {
+//            System.out.println(toString(c));
+//        }
+//        System.out.println(&quot;The end.&quot;);
+//    }
+
+    public static String toString(Customer c) {
+<span class="nc" id="L54">        return &quot;{&quot; + c.getId() + &quot;, &quot; + c.getFirstname() + &quot;, &quot; + c.getLastname() + &quot;}&quot;;</span>
+    }
+
+    public static java.sql.Date convertToSQLDate(Date d) {
+<span class="nc" id="L58">        return new java.sql.Date(d.getTime());</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

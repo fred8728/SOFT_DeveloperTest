@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JSONParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JSON-parser</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">JSONParser.java</span></div><h1>JSONParser.java</h1><pre class="source lang-java linenums">import exceptions.CustomJsonException;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L8">public class JSONParser {</span>
+
+
+    public List&lt;String&gt; parseToString(JSONObject obj, String key) {
+<span class="nc" id="L12">        JSONArray arr = obj.getJSONArray(key);</span>
+
+<span class="nc" id="L14">        List&lt;String&gt; list = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        for (int i = 0; i &lt; arr.length(); i++) {</span>
+<span class="nc" id="L16">            list.add(arr.getJSONObject(i).getString(key));</span>
+        }
+<span class="nc" id="L18">        return list;</span>
+    }
+
+    public String getSingleValueFromJson(JSONObject obj, String key) throws CustomJsonException {
+<span class="nc bnc" id="L22" title="All 4 branches missed.">        if (obj.isEmpty() || obj.isNull(key)){</span>
+<span class="nc" id="L23">            throw new CustomJsonException(&quot;JsonObject is null or empty&quot;);</span>
+        }
+<span class="nc" id="L25">        return obj.getString(key);</span>
+    }
+
+    public List&lt;String&gt; getAllValuesFromJson(JSONObject obj) {
+<span class="nc" id="L29">        JSONArray arr = new JSONArray(obj);</span>
+<span class="nc" id="L30">        List &lt;String&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (int i = 0; i &lt; arr.length(); i++) {</span>
+<span class="nc" id="L32">            list.add((String) arr.get(i));</span>
+        }
+<span class="nc" id="L34">        return list;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
