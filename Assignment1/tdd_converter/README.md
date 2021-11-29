@@ -21,9 +21,9 @@
 -	Skyl din tandbørste fri for tandpasta og du er nu færdig.
 ## 2. Two katas
 ### 2.1 Opgave
-Opgaven fahrenheit til celsius kan findes her: [FahrenheitToCelsius](https://github.com/fred8728/SOFT_DeveloperTest/blob/master/tdd_converter/src/test/java/TestFahrenheitToCelcius.java)
+Opgaven fahrenheit til celsius kan findes her: [FahrenheitToCelsius](https://github.com/fred8728/SOFT_DeveloperTest/blob/master/Assignment1/tdd_converter/src/main/java/converter/FahrenheitToCelcius.java)
 ### 2.2 Opgave
-Opgaven arabic to roman numerals kan findes her: [ArabicToRoman](https://github.com/fred8728/SOFT_DeveloperTest/blob/master/tdd_converter/src/test/java/TestArabicToRoman.java)
+Opgaven arabic to roman numerals kan findes her: [ArabicToRoman](https://github.com/fred8728/SOFT_DeveloperTest/blob/master/Assignment1/tdd_converter/src/main/java/converter/RomanNumerals.java)
 ## 3.	Thoughts on TDD
 
 ```
